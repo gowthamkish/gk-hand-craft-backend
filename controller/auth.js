@@ -47,7 +47,9 @@ export const login = async (req, res) => {
     );
 
     if (!isPasswordCorrect) {
-      return res.status(500).json({ message: "Password Incorrect" });
+      return res
+        .status(500)
+        .send({ message: "Incorrect Password", status: 500 });
     }
 
     const payload = {
@@ -65,9 +67,9 @@ export const login = async (req, res) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ message: "Login success" });
+      .send({ status: 200, message: "Login success" });
   } catch (error) {
     console.log(error);
-    return res.json("Server error - Login not success");
+    return res.send({ message: "Server error - Login not success" });
   }
 };
